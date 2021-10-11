@@ -1,31 +1,33 @@
 import React, { Component } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 class Navbar extends Component {
 
-    render() { 
+    render() {
         return (
             <React.Fragment>
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <div className="container-md">
+                    <div className="container" style={{flexWrap: 'nowrap'}}>
                         <NavLink className="navbar-brand" to="/">Navbar</NavLink>
-                        <button type="button" className="btn btn-primary">
-                            Products <span className="badge bg-secondary">{this.props.productsCount}</span>
-                        </button>
-
-                        <div className="" id="navbarSupportedContent">
-                            <ul className="navbar-nav">
+                        <div className="navbar-collapse" id="navbarNav">
+                            <ul className="navbar-nav" style={{flexDirection:"row"}}>
                                 <li className="nav-item">
-                                    <NavLink className="nav-link" aria-current="page" to="/home">Home</NavLink>
+                                    <NavLink className="nav-link mx-2" aria-current="page" to="/home">Home</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink className="nav-link" to="/about">About</NavLink>
+                                    <NavLink className="nav-link mx-2" to="/about">About</NavLink>
                                 </li>
                                 <li className="nav-item">
-                                    <NavLink className="nav-link" to="/cart">Shopping Cart</NavLink>
+                                    <NavLink className="nav-link mx-2" to="/cart">Shopping Cart</NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink className="nav-link mx-2" to="/login">Login</NavLink>
                                 </li>
                             </ul>
                         </div>
+                        <button type="button" className="btn btn-primary btn-sm d-flex">
+                            Products <span className="badge bg-secondary m-1">{this.props.productsCount}</span>
+                        </button>
                     </div>
                 </nav>
             </React.Fragment>

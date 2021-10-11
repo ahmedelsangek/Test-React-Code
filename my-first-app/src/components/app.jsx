@@ -6,6 +6,7 @@ import About from './about';
 import ShoppingCart from './shoppingCart';
 import ProductDetails from './productDetails';
 import PageNotFound from './notFound';
+import Login from './login';
 
 
 
@@ -66,6 +67,7 @@ class App extends Component {
                         <Route path="/notFound" component={PageNotFound} />
                         <Route path="/about" component={About} />
                         <Route path="/home" component={Home} />
+                        <Route path="/login" component={Login} />
                         <Redirect from="/" to="/home" />
                         <Redirect to="/notFound" />
                     </Switch>

@@ -1,5 +1,4 @@
 import React from 'react';
-import querystring from "query-string";
 
 
 class ProductDetails extends React.Component {

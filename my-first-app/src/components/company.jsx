@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const Company = () => {
     return ( <h2>Our Company</h2> );
