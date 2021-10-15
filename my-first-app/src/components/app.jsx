@@ -7,17 +7,28 @@ import ShoppingCart from './shoppingCart';
 import ProductDetails from './productDetails';
 import PageNotFound from './notFound';
 import Login from './login';
+import axios from "axios";
+import Admin from './admin';
+import CreateProduct from './createProduct';
+import EditProduct from './editProduct';
 
 
 
 class App extends Component {
 
     state = {
-        products : [
-            {id: 1, name: "Burger", count: 2},
-            {id: 2, name: "Frais", count: 0},
-            {id: 3, name: "Cola", count: 3}
-        ]
+        products : []
+    }
+
+    //Call Backend Server
+    async componentDidMount () {
+
+        const {data} = await axios.get("http://localhost:3000/products");
+        this.setState({products:data});
+
+        // let promise = fetch("https://jsonplaceholder.typicode.com/posts");
+        // let res = promise.then(res => res.json());
+        // res.then(data => console.log(data));
     }
 
     handleDelete = (product) => {
@@ -68,6 +79,9 @@ class App extends Component {
                         <Route path="/about" component={About} />
                         <Route path="/home" component={Home} />
                         <Route path="/login" component={Login} />
+                        <Route path="/admin" render={ (props) => <Admin products={this.state.products} {...props} /> } />
+                        <Route path="/create" component={CreateProduct} />
+                        <Route path="/edit/:id" render={ (props) => <EditProduct products={this.state.products} {...props} />} />
                         <Redirect from="/" to="/home" />
                         <Redirect to="/notFound" />
                     </Switch>
