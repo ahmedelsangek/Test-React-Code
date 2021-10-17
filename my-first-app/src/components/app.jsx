@@ -11,6 +11,7 @@ import axios from "axios";
 import Admin from './admin';
 import CreateProduct from './createProduct';
 import EditProduct from './editProduct';
+import { toast, ToastContainer } from "react-toastify";
 
 
 
@@ -29,11 +30,18 @@ class App extends Component {
 
     handleDelete = async (product) => {
 
-        //Call Backend
-        await axios.delete(`http://localhost:3000/products/${product.id}`);
+        const oldProducts = [...this.state.products];
 
         const newProducts = this.state.products.filter(p => p.id !== product.id);
         this.setState({products : newProducts});
+
+        //Call Backend
+        try {
+            await axios.delete(`http://localhost:3000/progducts/${product.id}`);
+        } catch (ex) {
+            toast.error("Can't Delete Data");
+            this.setState({products:oldProducts});
+        }
     };
 
     handelSet = () => {
@@ -61,6 +69,7 @@ class App extends Component {
     render() {
         return (
             <React.Fragment>
+                <ToastContainer />
                 <Navbar productsCount={this.state.products.filter(p => p.count > 0).length}/>
                 <div className="container">
                     <Switch>
