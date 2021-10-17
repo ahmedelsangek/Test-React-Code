@@ -31,7 +31,7 @@ class Admin extends React.Component {
                                         </Link>
                                     </td>
                                     <td>
-                                        <span style={{cursor:'pointer'}}>
+                                        <span onClick={ () => this.props.onDelete(product) } style={{cursor:'pointer'}}>
                                             <i className="fas fa-trash m-2"></i>
                                         </span>
                                     </td>

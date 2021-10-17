@@ -25,13 +25,13 @@ class App extends Component {
 
         const {data} = await axios.get("http://localhost:3000/products");
         this.setState({products:data});
-
-        // let promise = fetch("https://jsonplaceholder.typicode.com/posts");
-        // let res = promise.then(res => res.json());
-        // res.then(data => console.log(data));
     }
 
-    handleDelete = (product) => {
+    handleDelete = async (product) => {
+
+        //Call Backend
+        await axios.delete(`http://localhost:3000/products/${product.id}`);
+
         const newProducts = this.state.products.filter(p => p.id !== product.id);
         this.setState({products : newProducts});
     };
@@ -58,7 +58,7 @@ class App extends Component {
         this.setState({products})
     };
 
-    render() { 
+    render() {
         return (
             <React.Fragment>
                 <Navbar productsCount={this.state.products.filter(p => p.count > 0).length}/>
@@ -79,9 +79,13 @@ class App extends Component {
                         <Route path="/about" component={About} />
                         <Route path="/home" component={Home} />
                         <Route path="/login" component={Login} />
-                        <Route path="/admin" render={ (props) => <Admin products={this.state.products} {...props} /> } />
+                        <Route
+                            path="/admin"
+                            render={ (props) => <Admin products={this.state.products} {...props}
+                            onDelete={this.handleDelete}
+                            /> } />
                         <Route path="/create" component={CreateProduct} />
-                        <Route path="/edit/:id" render={ (props) => <EditProduct products={this.state.products} {...props} />} />
+                        <Route path="/edit/:id" component={EditProduct} />
                         <Redirect from="/" to="/home" />
                         <Redirect to="/notFound" />
                     </Switch>
